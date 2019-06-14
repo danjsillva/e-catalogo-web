@@ -15,15 +15,15 @@ export default function Header() {
           />
         </Link>
         <span>
-          {/* <i class="material-icons">menu</i> */}
+          {/* <i className="material-icons">menu</i> */}
           <Link to="/produtos" className="text-dark mr-4">
-            <i class="material-icons">photo_camera</i>
+            <i className="material-icons">photo_camera</i>
           </Link>
           <Link to="/categorias" className="text-dark mr-4">
-            <i class="material-icons">local_offer</i>
+            <i className="material-icons">local_offer</i>
           </Link>
           <Link to="/laboratorios" className="text-dark">
-            <i class="material-icons">local_pharmacy</i>
+            <i className="material-icons">local_pharmacy</i>
           </Link>
         </span>
       </div>

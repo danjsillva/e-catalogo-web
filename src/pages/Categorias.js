@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import CategoriaService from "../services/CategoriaService";
 
+const emptyCategoria = {
+  nome: ""
+};
+
 export default function Categorias(props) {
-  const [categoria, setCategoria] = useState({
-    nome: ""
-  });
+  const [categoria, setCategoria] = useState(emptyCategoria);
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
@@ -21,7 +23,13 @@ export default function Categorias(props) {
   const saveCategoria = async ({ data }) => {
     await CategoriaService.saveCategoria({ data });
 
-    setCategoria({});
+    setCategoria(emptyCategoria);
+
+    fetchCategorias({});
+  };
+
+  const removeCategoria = async ({ id }) => {
+    await CategoriaService.removeCategoria({ id });
 
     fetchCategorias({});
   };
@@ -36,6 +44,12 @@ export default function Categorias(props) {
     event.preventDefault();
 
     saveCategoria({ data: categoria });
+  };
+
+  const handleRemoveClick = async id => {
+    if (window.confirm("Esta operação não pode ser desfeita. Tem certeza?")) {
+      removeCategoria({ id });
+    }
   };
 
   return (
@@ -75,7 +89,10 @@ export default function Categorias(props) {
           <main className="card-body py-2">
             <div className="form-row">
               <div className="col-11">{categoria.nome}</div>
-              <div className="col-1 text-right text-danger">
+              <div
+                className="col-1 text-right text-danger pointer"
+                onClick={e => handleRemoveClick(categoria.id)}
+              >
                 <i className="material-icons">remove_circle_outline</i>
               </div>
             </div>

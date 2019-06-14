@@ -30,5 +30,17 @@ export default {
 
       return {};
     }
+  },
+
+  removeLaboratorio: async ({ id }) => {
+    try {
+      let response = (await API.delete(`/laboratorios/${id}`)).data;
+
+      return response;
+    } catch (error) {
+      console.error(error.response.data);
+
+      return {};
+    }
   }
 };

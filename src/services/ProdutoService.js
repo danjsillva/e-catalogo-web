@@ -29,5 +29,17 @@ export default {
 
       return {};
     }
+  },
+
+  removeProduto: async ({ id }) => {
+    try {
+      let response = (await API.delete(`/produtos/${id}`)).data;
+
+      return response;
+    } catch (error) {
+      console.error(error.response.data);
+
+      return {};
+    }
   }
 };

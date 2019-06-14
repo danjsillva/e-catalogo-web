@@ -29,5 +29,17 @@ export default {
 
       return {};
     }
+  },
+
+  removeCategoria: async ({ id }) => {
+    try {
+      let response = (await API.delete(`/categorias/${id}`)).data;
+
+      return response;
+    } catch (error) {
+      console.error(error.response.data);
+
+      return {};
+    }
   }
 };

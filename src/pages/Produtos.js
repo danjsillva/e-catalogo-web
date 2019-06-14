@@ -4,15 +4,18 @@ import ProdutoService from "../services/ProdutoService";
 import LaboratorioService from "../services/LaboratorioService";
 import CategoriaService from "../services/CategoriaService";
 
+const emptyProduto = {
+  nome: "",
+  ean: "",
+  descricao: "",
+  laboratorios_id: "",
+  categorias: [],
+  imagem: null
+};
+
 export default function Produtos(props) {
-  const [produto, setProduto] = useState({
-    nome: "",
-    ean: "",
-    descricao: "",
-    laboratorios_id: "",
-    categorias: [],
-    imagem: null
-  });
+  const [produto, setProduto] = useState(emptyProduto);
+  const [produtos, setProdutos] = useState([]);
   const [laboratorios, setLaboratorios] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [selectedLaboratorio, setSelectedLaboratorio] = useState("");
@@ -21,7 +24,14 @@ export default function Produtos(props) {
   useEffect(() => {
     fetchLaboratorios({});
     fetchCategorias({});
+    fetchProdutos({});
   }, []);
+
+  const fetchProdutos = async params => {
+    let response = await ProdutoService.fetchProdutos(params);
+
+    setProdutos(response);
+  };
 
   const fetchLaboratorios = async params => {
     let response = await LaboratorioService.fetchLaboratorios(params);
@@ -38,7 +48,13 @@ export default function Produtos(props) {
   const saveProduto = async ({ data }) => {
     await ProdutoService.saveProduto({ data });
 
-    setProduto({});
+    setProduto(emptyProduto);
+  };
+
+  const removeProduto = async ({ id }) => {
+    await ProdutoService.removeProduto({ id });
+
+    fetchProdutos({});
   };
 
   const handleImageChange = async event => {
@@ -96,6 +112,12 @@ export default function Produtos(props) {
     data.append("imagem", produto.imagem);
 
     saveProduto({ data });
+  };
+
+  const handleRemoveClick = async id => {
+    if (window.confirm("Esta operação não pode ser desfeita. Tem certeza?")) {
+      removeProduto({ id });
+    }
   };
 
   return (
@@ -224,8 +246,28 @@ export default function Produtos(props) {
             </button>
           </form>
         </main>
+      </article>
 
-        <footer className="card-footer p-0" />
+      <article className="card my-5 rounded-0">
+        <header className="card-header bg-white">
+          <span className="font-weight-bold">Produtos</span>
+        </header>
+
+        {produtos.map(produto => (
+          <main className="card-body py-2">
+            <div className="form-row">
+              <div className="col-11">{produto.nome}</div>
+              <div
+                className="col-1 text-right text-danger pointer"
+                onClick={e => handleRemoveClick(produto.id)}
+              >
+                <i className="material-icons">remove_circle_outline</i>
+              </div>
+            </div>
+          </main>
+        ))}
+
+        <footer className="card-footer">{produtos.length} resultados</footer>
       </article>
     </section>
   );
