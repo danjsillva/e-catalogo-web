@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { apiURL } from "../config/api";
 import ProdutoService from "../services/ProdutoService";
 
-export default function Feed() {
+export default function Feed(props) {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {

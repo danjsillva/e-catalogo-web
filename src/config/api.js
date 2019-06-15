@@ -8,11 +8,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async config => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU2MDQ1MTUxMH0.cEl_OOGun06_4T9JIkkn329gwBB4KjgCgWrQRhzsukc";
-    // (await localStorage.getItem("passport"))
-    //   ? JSON.parse(localStorage.getItem("passport")).token
-    //   : null;
+    const token = (await localStorage.getItem("passport"))
+      ? JSON.parse(localStorage.getItem("passport")).token
+      : null;
 
     if (
       !config.preventShowLoading &&

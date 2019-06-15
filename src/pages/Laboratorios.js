@@ -61,19 +61,20 @@ export default function Laboratorios(props) {
 
         <main className="card-body">
           <form onSubmit={e => handleFormSubmit(e)}>
-            <div className="form-group">
-              <input
-                type="text"
-                name="nome"
-                value={laboratorio.nome}
-                onChange={e => handleInputChange(e)}
-                required
-                placeholder="Nome do laboratório"
-                className="form-control"
-              />
-            </div>
+            <input
+              type="text"
+              name="nome"
+              value={laboratorio.nome}
+              onChange={e => handleInputChange(e)}
+              required
+              placeholder="Nome do laboratório"
+              className="form-control form-control-sm"
+            />
 
-            <button type="submit" className="btn btn-primary btn-block mt-4">
+            <button
+              type="submit"
+              className="btn btn-sm btn-primary btn-block mt-3"
+            >
               Enviar
             </button>
           </form>
@@ -86,9 +87,13 @@ export default function Laboratorios(props) {
         </header>
 
         {laboratorios.map(laboratorio => (
-          <main className="card-body py-2">
+          <main className="card-body border-bottom py-2">
             <div className="form-row">
-              <div className="col-11">{laboratorio.nome}</div>
+              <div className="col-1">{laboratorio.id}</div>
+              <div className="col-10">
+                {laboratorio.nome}
+                <div className="text-muted">0 produtos</div>
+              </div>
               <div
                 className="col-1 text-right text-danger pointer"
                 onClick={e => handleRemoveClick(laboratorio.id)}

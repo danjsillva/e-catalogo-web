@@ -1,18 +1,42 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 
+import Login from "./pages/Login";
 import Feed from "./pages/Feed";
 import Produtos from "./pages/Produtos";
 import Laboratorios from "./pages/Laboratorios";
 import Categorias from "./pages/Categorias";
 
-export default function Routes() {
+import { AppContext } from "./App";
+
+export default function Routes(props) {
+  const context = useContext(AppContext);
+
+  useEffect(() => {
+    // console.log(props);
+  }, []);
+
   return (
     <Switch>
       <Route path="/" exact component={Feed} />
-      <Route path="/produtos" component={Produtos} />
-      <Route path="/laboratorios" component={Laboratorios} />
-      <Route path="/categorias" component={Categorias} />
+      <Route path="/login" component={Login} />
+
+      {context.isLogged && (
+        <>
+          <Route path="/produtos" component={Produtos} />
+          <Route path="/laboratorios" component={Laboratorios} />
+          <Route path="/categorias" component={Categorias} />
+        </>
+      )}
+
+      <Route
+        component={() => (
+          <div className="container mt-5">
+            <span className="font-weight-bold">Erro 401.</span> Página não
+            encontrada.
+          </div>
+        )}
+      />
     </Switch>
   );
 }

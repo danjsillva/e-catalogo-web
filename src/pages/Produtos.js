@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import ProdutoService from "../services/ProdutoService";
 import LaboratorioService from "../services/LaboratorioService";
@@ -68,7 +69,7 @@ export default function Produtos(props) {
   };
 
   const handleLaboratorioChange = async event => {
-    const { name, value } = event.target;
+    const { value } = event.target;
 
     setSelectedLaboratorio(value);
 
@@ -124,106 +125,107 @@ export default function Produtos(props) {
     <section className="container">
       <article className="card my-5 rounded-0">
         <header className="card-header bg-white">
-          <span className="font-weight-bold">Novo produto</span>
+          <div className="form-row">
+            <div className="col-6">
+              <span className="font-weight-bold">Novo produto</span>
+            </div>
+            <div className="col-6 text-right">
+              <Link to="/categorias" className="text-dar mr-4">
+                Categorias
+                {/* <i className="material-icons">local_offer</i> */}
+              </Link>
+              <Link to="/laboratorios" className="text-dar">
+                Laboratórios
+                {/* <i className="material-icons">assignment</i> */}
+              </Link>
+            </div>
+          </div>
         </header>
 
         <main className="card-body">
           <form onSubmit={e => handleFormSubmit(e)}>
-            <div className="form-group">
-              <input
-                type="file"
-                name="imagem"
-                onChange={e => handleImageChange(e)}
-                required
-                placeholder="Selecione a imagem do produto"
-                className="form-file w-100"
-              />
-            </div>
+            <input
+              type="file"
+              name="imagem"
+              onChange={e => handleImageChange(e)}
+              required
+              className=""
+            />
 
-            <div className="form-group">
-              <input
-                type="text"
-                name="nome"
-                value={produto.nome}
-                onChange={e => handleInputChange(e)}
-                required
-                placeholder="Nome do produto"
-                className="form-control"
-              />
-            </div>
+            <input
+              type="text"
+              name="nome"
+              value={produto.nome}
+              onChange={e => handleInputChange(e)}
+              required
+              placeholder="Nome do produto"
+              className="form-control form-control-sm mt-2"
+            />
 
-            <div className="form-group">
-              <input
-                type="text"
-                name="ean"
-                value={produto.ean}
-                onChange={e => handleInputChange(e)}
-                required
-                placeholder="EAN ou código interno do produto"
-                className="form-control"
-              />
-            </div>
+            <input
+              type="text"
+              name="ean"
+              value={produto.ean}
+              onChange={e => handleInputChange(e)}
+              required
+              placeholder="EAN ou código interno do produto"
+              className="form-control form-control-sm mt-2"
+            />
 
-            <div className="form-group">
-              <input
-                type="text"
-                name="descricao"
-                value={produto.descricao}
-                onChange={e => handleInputChange(e)}
-                required
-                placeholder="Descrição do produto"
-                className="form-control"
-              />
-            </div>
+            <input
+              type="text"
+              name="descricao"
+              value={produto.descricao}
+              onChange={e => handleInputChange(e)}
+              required
+              placeholder="Descrição do produto"
+              className="form-control form-control-sm mt-2"
+            />
 
-            <div className="form-group">
-              <select
-                name="selectedLaboratorio"
-                value={selectedLaboratorio}
-                onChange={e => handleLaboratorioChange(e)}
-                required
-                className="form-control"
-              >
-                <option value="" disabled>
-                  Selecione o laboratório
+            <select
+              name="selectedLaboratorio"
+              value={selectedLaboratorio}
+              onChange={e => handleLaboratorioChange(e)}
+              required
+              className="form-control form-control-sm mt-2"
+            >
+              <option value="" disabled>
+                Selecione o laboratório
+              </option>
+              {laboratorios.map(laboratorio => (
+                <option value={laboratorio.id} key={laboratorio.id}>
+                  {laboratorio.nome}
                 </option>
-                {laboratorios.map(laboratorio => (
-                  <option value={laboratorio.id} key={laboratorio.id}>
-                    {laboratorio.nome}
-                  </option>
-                ))}
-              </select>
-            </div>
+              ))}
+            </select>
 
-            <div className="form-row">
+            <div className="form-row mt-2">
               <div className="col-10">
-                <div className="form-group">
-                  <select
-                    name="selectedCategoria"
-                    value={selectedCategoria}
-                    onChange={e => handleCategoriaChange(e)}
-                    required
-                    className="form-control"
-                    style={{
-                      borderTopRightRadius: 0,
-                      borderBottomRightRadius: 0
-                    }}
-                  >
-                    <option value="" disabled>
-                      Selecione a categoria
+                <select
+                  name="selectedCategoria"
+                  value={selectedCategoria}
+                  onChange={e => handleCategoriaChange(e)}
+                  required
+                  className="form-control form-control-sm"
+                  style={{
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0
+                  }}
+                >
+                  <option value="" disabled>
+                    Selecione a categoria
+                  </option>
+                  {categorias.map(categoria => (
+                    <option value={categoria.id} key={categoria.id}>
+                      {categoria.nome}
                     </option>
-                    {categorias.map(categoria => (
-                      <option value={categoria.id} key={categoria.id}>
-                        {categoria.nome}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                  ))}
+                </select>
               </div>
               <div className="col-2">
                 <button
                   type="button"
-                  className="btn btn-outline-primary btn-block"
+                  className="btn btn-sm btn-outline-primary btn-block"
                   onClick={e => handleCategoriaAdd(e)}
                   disabled={!selectedCategoria}
                 >
@@ -234,14 +236,17 @@ export default function Produtos(props) {
 
             {produto.categorias.map(categoria => (
               <span
-                className="badge badge-pill badge-primary mr-2"
+                className="badge badge-pill badge-primary mt-2 mr-2"
                 key={categoria.id}
               >
                 {categoria.nome}
               </span>
             ))}
 
-            <button type="submit" className="btn btn-primary btn-block mt-4">
+            <button
+              type="submit"
+              className="btn btn-sm btn-primary btn-block mt-3"
+            >
               Enviar
             </button>
           </form>
@@ -254,9 +259,13 @@ export default function Produtos(props) {
         </header>
 
         {produtos.map(produto => (
-          <main className="card-body py-2">
+          <main className="card-body border-bottom py-2">
             <div className="form-row">
-              <div className="col-11">{produto.nome}</div>
+              <div className="col-1">{produto.id}</div>
+              <div className="col-10">
+                {produto.nome}
+                <div className="text-muted">{produto.ean} {produto.laboratorio.nome}</div>
+              </div>
               <div
                 className="col-1 text-right text-danger pointer"
                 onClick={e => handleRemoveClick(produto.id)}
