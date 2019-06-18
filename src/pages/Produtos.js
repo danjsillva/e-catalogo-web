@@ -123,7 +123,7 @@ export default function Produtos(props) {
 
   return (
     <section className="container">
-      <article className="card my-5 rounded-0">
+      <article className="card my-5">
         <header className="card-header bg-white">
           <div className="form-row">
             <div className="col-6">
@@ -253,7 +253,7 @@ export default function Produtos(props) {
         </main>
       </article>
 
-      <article className="card my-5 rounded-0">
+      <article className="card my-5">
         <header className="card-header bg-white">
           <span className="font-weight-bold">Produtos</span>
         </header>

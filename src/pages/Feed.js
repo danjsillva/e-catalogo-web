@@ -20,8 +20,8 @@ export default function Feed(props) {
   return (
     <section className="container">
       {produtos.map(produto => (
-        <article className="card my-5 rounded-0" key={produto.id}>
-          <header className="card-header bg-white rounded-0">
+        <article className="card my-5" key={produto.id}>
+          <header className="card-header bg-white">
             <div className="form-row">
               <div className="col-11">
                 <span className="font-weight-bold d-block">{produto.nome}</span>

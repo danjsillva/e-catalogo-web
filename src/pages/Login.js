@@ -39,7 +39,7 @@ export default function Login(props) {
     <section className="container">
       <div className="form-row">
         <div className="col-8 offset-2">
-          <div className="card my-5 rounded-0">
+          <div className="card my-5">
             <div className="card-body text-center">
               <img
                 src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png`}

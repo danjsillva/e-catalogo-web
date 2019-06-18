@@ -54,7 +54,7 @@ export default function Laboratorios(props) {
 
   return (
     <section className="container">
-      <article className="card my-5 rounded-0">
+      <article className="card my-5">
         <header className="card-header bg-white">
           <span className="font-weight-bold">Novo laboratório</span>
         </header>
@@ -81,7 +81,7 @@ export default function Laboratorios(props) {
         </main>
       </article>
 
-      <article className="card my-5 rounded-0">
+      <article className="card my-5">
         <header className="card-header bg-white">
           <span className="font-weight-bold">Laboratórios</span>
         </header>

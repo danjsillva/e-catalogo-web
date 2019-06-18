@@ -54,7 +54,7 @@ export default function Categorias(props) {
 
   return (
     <section className="container">
-      <article className="card my-5 rounded-0">
+      <article className="card my-5">
         <header className="card-header bg-white">
           <span className="font-weight-bold">Novo categoria</span>
         </header>
@@ -81,7 +81,7 @@ export default function Categorias(props) {
         </main>
       </article>
 
-      <article className="card my-5 rounded-0">
+      <article className="card my-5">
         <header className="card-header bg-white">
           <span className="font-weight-bold">Categorias</span>
         </header>
