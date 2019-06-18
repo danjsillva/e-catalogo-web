@@ -44,10 +44,8 @@ export default function Login(props) {
               <img
                 src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png`}
                 alt=""
-                className="img-fluid w-50"
+                className="img-fluid w-50 mb-3"
               />
-
-              <hr className="mb-4" />
 
               <form onSubmit={e => handleLogin(e)}>
                 <input
@@ -55,7 +53,10 @@ export default function Login(props) {
                   name="login"
                   value={credenciais.login}
                   onChange={e =>
-                    setCredenciais({ ...credenciais, login: e.target.value })
+                    setCredenciais({
+                      ...credenciais,
+                      login: e.target.value
+                    })
                   }
                   autoFocus
                   required
@@ -69,7 +70,10 @@ export default function Login(props) {
                   name="senha"
                   value={credenciais.senha}
                   onChange={e =>
-                    setCredenciais({ ...credenciais, senha: e.target.value })
+                    setCredenciais({
+                      ...credenciais,
+                      senha: e.target.value
+                    })
                   }
                   required
                   disabled={isLoading}
@@ -84,7 +88,7 @@ export default function Login(props) {
                   disabled={isLoading}
                   className="btn btn-sm btn-primary btn-block"
                 >
-                  Entrar
+                  Entrar como administrador
                 </button>
               </form>
             </div>

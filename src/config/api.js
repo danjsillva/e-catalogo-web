@@ -1,23 +1,17 @@
 import axios from "axios";
 
+export const connection = window.location.host.split(".")[0];
 export const apiURL = process.env.REACT_APP_API_URI;
 
 const api = axios.create({
-  baseURL: apiURL
+  baseURL: apiURL + connection
 });
 
 api.interceptors.request.use(
   async config => {
-    const token = (await localStorage.getItem("passport"))
+    const token = (await JSON.parse(localStorage.getItem("passport")))
       ? JSON.parse(localStorage.getItem("passport")).token
       : null;
-
-    if (
-      !config.preventShowLoading &&
-      !window.location.href.includes("/login")
-    ) {
-      document.body.classList.add("loading-indicator");
-    }
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -32,22 +26,9 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   async response => {
-    document.body.classList.remove("loading-indicator");
-
     return response;
   },
   async error => {
-    document.body.classList.remove("loading-indicator");
-
-    if (
-      error.response.status === 401 &&
-      !window.location.href.includes("/login")
-    ) {
-      alert("Sessão expirada! Faça login e tente novamente.");
-
-      window.location.hash = "#/login";
-    }
-
     return Promise.reject(error);
   }
 );

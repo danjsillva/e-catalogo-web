@@ -7,7 +7,7 @@ export default {
 
       return response;
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
 
       return [];
     }
@@ -17,7 +17,7 @@ export default {
     try {
       localStorage.removeItem("passport");
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
     }
   },
 

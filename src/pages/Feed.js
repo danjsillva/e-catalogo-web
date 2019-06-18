@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Instagram } from "react-content-loader";
 
 import { apiURL } from "../config/api";
 import ProdutoService from "../services/ProdutoService";

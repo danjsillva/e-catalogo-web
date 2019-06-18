@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -12,14 +12,10 @@ import { AppContext } from "./App";
 export default function Routes(props) {
   const context = useContext(AppContext);
 
-  useEffect(() => {
-    // console.log(props);
-  }, []);
-
   return (
     <Switch>
-      <Route path="/" exact component={Feed} />
       <Route path="/login" component={Login} />
+      <Route path="/" exact component={Feed} />
 
       {context.isLogged && (
         <>
